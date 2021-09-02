@@ -77,6 +77,16 @@ public class StudentAdapter extends RecyclerView.Adapter {
                             .show();
                 }
             });
+
+            itemview.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(),
+                            studentname.getText() + " | "
+                                    + " Demo function", Toast.LENGTH_SHORT)
+                            .show();
+                }
+            });
         }
     }
 
