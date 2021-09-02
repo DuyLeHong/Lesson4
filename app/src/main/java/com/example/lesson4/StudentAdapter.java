@@ -23,15 +23,44 @@ public class StudentAdapter extends RecyclerView.Adapter {
         this.mContext = mContext;
     }
 
+    //Hằng số hai kiểu hiện thị phần tử
+
+    public static final int TYPE1 = 0;
+    public static final int TYPE2 = 1;
+
+    /**
+     * Những phần tử chia hết cho 3 có kiểu 1, còn lại kiểu 0
+     */
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position % 3 == 0)
+            return TYPE2;
+        else
+            return TYPE1;
+    }
+
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        // Nạp layout cho View biểu diễn phần tử sinh viên
-        View studentView =
-                inflater.inflate(R.layout.student_item, parent, false);
+        View studentView = null;
+
+        switch (viewType)
+        {
+            case TYPE1:
+                studentView =
+                        inflater.inflate(R.layout.student_item,
+                                parent, false);
+                break;
+            case TYPE2:
+                studentView =
+                        inflater.inflate(R.layout.student_item_2,
+                                parent, false);
+                break;
+        }
 
         MyViewHolder viewHolder = new MyViewHolder(studentView);
         return viewHolder;
