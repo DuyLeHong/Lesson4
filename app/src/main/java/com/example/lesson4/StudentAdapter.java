@@ -1,7 +1,9 @@
 package com.example.lesson4;
 
 import android.content.Context;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +13,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class StudentAdapter extends RecyclerView.Adapter {
+public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.MyViewHolder> {
 
     //Dữ liệu hiện thị là danh sách sinh viên
     private ArrayList<Student> mStutents;
@@ -32,6 +34,14 @@ public class StudentAdapter extends RecyclerView.Adapter {
      * Những phần tử chia hết cho 3 có kiểu 1, còn lại kiểu 0
      */
 
+//    @Override
+//    public int getItemViewType(int position) {
+//        if (position % 3 == 0)
+//            return TYPE2;
+//        else
+//            return TYPE1;
+//    }
+
     @Override
     public int getItemViewType(int position) {
         if (position % 3 == 0)
@@ -42,14 +52,13 @@ public class StudentAdapter extends RecyclerView.Adapter {
 
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View studentView = null;
 
-        switch (viewType)
-        {
+        switch (viewType) {
             case TYPE1:
                 studentView =
                         inflater.inflate(R.layout.student_item,
@@ -67,12 +76,19 @@ public class StudentAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, int position) {
         Student student = mStutents.get(position);
 
-        ((MyViewHolder) holder).studentname.setText(student.getmName());
-        ((MyViewHolder) holder).birthyear.setText(student.getBirthYear() + "");
+
+        holder.studentname.setText(student.getmName());
+        holder.birthyear.setText(student.getBirthYear() + "");
+
+//        if (dieukien) {
+//            holder.studentname.setTextColor(mContext.getResources().getColor(android.R.color.holo_red_dark));
+//        }
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -84,14 +100,14 @@ public class StudentAdapter extends RecyclerView.Adapter {
      * Lớp nắm giữ cấu trúc view
      */
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private View itemview;
+        //private View itemview;
         public TextView studentname;
         public TextView birthyear;
         public Button detail_button;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            itemview = itemView;
+            //itemview = itemView;
             studentname = itemView.findViewById(R.id.studentname);
             birthyear = itemView.findViewById(R.id.birthyear);
             detail_button = itemView.findViewById(R.id.detail_button);
@@ -107,7 +123,7 @@ public class StudentAdapter extends RecyclerView.Adapter {
                 }
             });
 
-            itemview.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(v.getContext(),

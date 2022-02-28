@@ -36,23 +36,29 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
-        //linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
         //GridLayoutManager gridLayoutManager = new GridLayoutManager(this);
 
-//        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-//        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(linearLayoutManager);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
+
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu, menu);
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -62,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
                 Student student = students.get(2);
                 student.setmName("TÊN MỚI SỐ 3: "
                         + Calendar.getInstance().getTimeInMillis());
+
+                long millis = System.currentTimeMillis();
+
                 student.setBirthYear(2000);
                 adapter.notifyItemChanged(2);
 
